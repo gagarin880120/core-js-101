@@ -412,21 +412,6 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(/* pathes */) {
-  // let result = '';
-  // for (let i = 0; i < pathes.length; i += 1) {
-  //   if (!pathes[i + 1]) {
-  //     break;
-  //   }
-  //   for (let j = 0; j < pathes[i].length; j += 1) {
-  //     if (pathes[i][j] === pathes[i + 1][j]) {
-  //       result += pathes[i][j];
-  //     }
-  //   }
-  // }
-  // if (result.length > 1) {
-  //   result = result.slice(0, result.lastIndexOf('/') + 1);
-  // }
-  // return result;
   throw new Error('Not implemented');
 }
 
@@ -448,8 +433,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const result = [];
+  for (let i = 0; i < m1.length; i += 1) {
+    result[i] = [];
+    for (let j = 0; j < m2[0].length; j += 1) {
+      let sum = 0;
+      for (let k = 0; k < m1[0].length; k += 1) {
+        sum += m1[i][k] * m2[k][j];
+      }
+      result[i][j] = sum;
+    }
+  }
+  return result;
 }
 
 
@@ -483,8 +479,24 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
+function evaluateTicTacToePosition(/* Position */) {
   throw new Error('Not implemented');
+  // const arr = Array.from({ length: Position.length },
+  //   // eslint-disable-next-line no-unused-vars
+  //   ((item) => Array.from({ length: Position.length })));
+  // for (let i = 0; i < Position.length; i += 1) {
+  //   if (Position[i].length < 3) Position[i].push(undefined);
+  //   if ([...new Set(Position[i])].length === 1) {
+  //     return Position[i][0];
+  //   }
+  //   for (let j = 0; j < Position[i].length; j += 1) {
+  //     arr[i][j] = Position[j][i];
+  //     if ([...new Set(arr[i])].length === 1) {
+  //       return arr[i][0];
+  //     }
+  //   }
+  // }
+  // return undefined;
 }
 
 
