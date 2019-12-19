@@ -419,7 +419,7 @@ function getCommonDirectoryPath(pathes) {
     return a;
   });
   const newArr = [];
-  for (let i = 0; i < Math.min(...arr.map(a => a.length)); i += 1) {
+  for (let i = 0; i < Math.min(...arr.map((a) => a.length)); i += 1) {
     for (let j = 0; j < arr.length; j += 1) {
       newArr.push(arr[j][i]);
     }
