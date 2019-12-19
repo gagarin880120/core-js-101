@@ -411,8 +411,25 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let str = '';
+  const arr = pathes.map((a) => {
+    // eslint-disable-next-line no-param-reassign
+    a = a.split('/');
+    return a;
+  });
+  const newArr = [];
+  for (let i = 0; i < Math.min(...arr.map(a => a.length)); i += 1) {
+    for (let j = 0; j < arr.length; j += 1) {
+      newArr.push(arr[j][i]);
+    }
+    const set = [...new Set(newArr)];
+    if (set.length !== i + 1) {
+      break;
+    }
+    str = `${set.join('/')}/`;
+  }
+  return str;
 }
 
 /**
@@ -479,24 +496,48 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* Position */) {
-  throw new Error('Not implemented');
-  // const arr = Array.from({ length: Position.length },
-  //   // eslint-disable-next-line no-unused-vars
-  //   ((item) => Array.from({ length: Position.length })));
-  // for (let i = 0; i < Position.length; i += 1) {
-  //   if (Position[i].length < 3) Position[i].push(undefined);
-  //   if ([...new Set(Position[i])].length === 1) {
-  //     return Position[i][0];
-  //   }
-  //   for (let j = 0; j < Position[i].length; j += 1) {
-  //     arr[i][j] = Position[j][i];
-  //     if ([...new Set(arr[i])].length === 1) {
-  //       return arr[i][0];
-  //     }
-  //   }
-  // }
-  // return undefined;
+function evaluateTicTacToePosition(Position) {
+  const arr = Position.map((a) => {
+    if (a.length < 3) {
+      a.push(undefined);
+      return a;
+    }
+    return a;
+  });
+
+  const rowCase = arr.filter((a) => a.every((v) => v === a[0] && v));
+  if (rowCase.length) {
+    return rowCase[0][0];
+  }
+
+  const colArr = Array.from({ length: Position.length },
+    /* eslint-disable no-unused-vars */
+    ((item) => Array.from({ length: Position.length })));
+
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let j = 0; j < arr.length; j += 1) {
+      colArr[i][j] = arr[j][i];
+    }
+  }
+
+  const colCase = colArr.filter((a) => a.every((v) => v === a[0]));
+  if (colCase.length) {
+    return colCase[0][0];
+  }
+
+  const diagonals = Array.from({ length: 2 },
+    ((inner) => Array.from({ length: 3 })));
+
+  for (let i = 0; i < diagonals[0].length; i += 1) {
+    diagonals[0][i] = arr[i][i];
+    diagonals[1][i] = arr[i][Math.abs(i - 2)];
+  }
+
+  const diagonalCase = diagonals.filter((a) => a.every((v) => v === a[0]));
+  if (diagonalCase.length) {
+    return diagonalCase[0][0];
+  }
+  return undefined;
 }
 
 
