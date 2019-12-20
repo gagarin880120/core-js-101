@@ -555,10 +555,7 @@ function distinct(arr) {
  *   }
  */
 function group(/* array, keySelector, valueSelector */) {
-  // const map = new Map();
-  // map.set(array.map(keySelector), array.map(valueSelector));
-  // console.log('keySelector:', keySelector, 'valueSelector:', valueSelector);
-  // console.log(map);
+  // console.log(array.map(keySelector));
   throw new Error('Not implemented');
 }
 
